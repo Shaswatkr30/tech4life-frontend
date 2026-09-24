@@ -1183,7 +1183,7 @@ function LoginPage() {
       setLoading(true);
       setError("");
 
-      const data = await apiRequest(`${API_BASE_URL}apihospitals/login`, {
+      const data = await apiRequest(`${API_BASE_URL}/api/hospitals/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1343,7 +1343,7 @@ function RegisterPage() {
           : null,
       };
 
-      await apiRequest(`${API_BASE_URL}apihospitals/register`, {
+      await apiRequest(`${API_BASE_URL}/api/hospitals/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1621,11 +1621,11 @@ function Dashboard() {
         organData,
         equipmentData,
       ] = await Promise.all([
-        apiRequest(`${API_BASE_URL}apihospitals/me`, { headers }),
-        apiRequest(`${API_BASE_URL}apiblood/my`, { headers }),
-        apiRequest(`${API_BASE_URL}apiicu/my`, { headers }),
-        apiRequest(`${API_BASE_URL}apiorgans/my`, { headers }),
-        apiRequest(`${API_BASE_URL}apiequipment/my`, { headers }),
+        apiRequest(`${API_BASE_URL}/api/hospitals/me`, { headers }),
+        apiRequest(`${API_BASE_URL}/api/blood/my`, { headers }),
+        apiRequest(`${API_BASE_URL}/api/icu/my`, { headers }),
+        apiRequest(`${API_BASE_URL}/api/organs/my`, { headers }),
+        apiRequest(`${API_BASE_URL}/api/equipment/my`, { headers }),
       ]);
 
       setHospital(hospitalData);
@@ -1650,7 +1650,7 @@ function Dashboard() {
     if (!confirmed) return;
 
     try {
-      await apiRequest(`${API_BASE_URL}apihospitals/delete`, {
+      await apiRequest(`${API_BASE_URL}/api/hospitals/delete`, {
         method: "DELETE",
         headers: authHeaders(),
       });
@@ -2030,8 +2030,8 @@ function ResourceManager({
       setSaving(true);
 
       const url = editingId
-        ? `${API_BASE_URL}api${endpoint()}/${editingId}`
-        : `${API_BASE_URL}api${endpoint()}/`;
+        ? `${API_BASE_URL}/api/${endpoint()}/${editingId}`
+        : `${API_BASE_URL}/api/${endpoint()}/`;
 
       const method = editingId ? "PUT" : "POST";
 
@@ -2072,7 +2072,7 @@ function ResourceManager({
 
     try {
       await apiRequest(
-        `${API_BASE_URL}api${endpoint()}/${id}`,
+        `${API_BASE_URL}/api/${endpoint()}/${id}`,
         {
           method: "DELETE",
           headers: authHeaders(),

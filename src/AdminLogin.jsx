@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 function AdminLogin() {
   const navigate = useNavigate();
 
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,7 +20,7 @@ function AdminLogin() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/admin/login",
+        `${API_BASE_URL}/api/admin/login`,
         {
           method: "POST",
           headers: {
